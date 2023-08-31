@@ -79,7 +79,6 @@ create table Categorias(
 
 create table CantidadStock(
 	IdCantidadStock int primary key identity(1,1),
-	IdSuministro int not null,
 	Cantidad int not null,
 	FechaEntrada date not null,
 );
