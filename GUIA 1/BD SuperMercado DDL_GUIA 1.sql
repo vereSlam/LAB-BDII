@@ -77,23 +77,22 @@ create table Categorias(
 	 categoria varchar(150)  not null
 );
 
-create table CantidadStock(
-	IdCantidadStock int primary key identity(1,1),
-	Cantidad int not null,
-	FechaEntrada date not null,
+create table unidadPrecio(
+	idUnidadPrecio int primary key identity(1,1), 
+    unidadPrecio varchar(200) not null,
 );
 
 create table Productos(
 	 idProducto int primary key identity(1,1), 
 	 idCategoria int not null,
 	 idProveedor int not null,
-     idCantidadStock int not null,
 	 nombreProducto varchar(150)  not null,
 	 descripcion varchar(255) not null,
-	 precio float not null,
+	 precioUnitario float not null,
+     idUnidadPrecio int not null
 	 foreign key (idCategoria)  references Categorias(idCategoria),
 	 foreign key (idProveedor) references Proveedores(idProveedor),
-     foreign key (idCantidadStock) references CantidadStock(idCantidadStock)
+     foreign key (idUnidadPrecio) references unidadPrecio(idUnidadPrecio)
 );
 
 create table Descuentos (
@@ -153,6 +152,12 @@ create table Pagos(
 	 foreign key (idMetodoPago) references MetodoPago(idMetodoPago)
 );
 
+create table CantidadStock(
+	IdCantidadStock int primary key identity(1,1),
+	Cantidad int not null,
+	FechaEntrada date not null,
+);
+
 Create table Compras(
 	IdCompra int primary key identity(1,1),
 	IdProveedor int not null,
@@ -162,7 +167,7 @@ Create table Compras(
 	ProductosComprados int,
 	foreign key (IdEmpleado) references Empleados(IdEmpleado),
 	foreign key (IdProveedor) references Proveedores(IdProveedor),
-	foreign key (IdCantidadStock) references CantidadStock(IdCantidadStock),
+	foreign key (IdCantidadStock) references CantidadStock(IdCantidadStock)
 );
 
 create table FacturaCompras(
@@ -180,6 +185,6 @@ create table Inventarios(
 	 cantExist int not null,
 	 fechaActualizacion date,
 	 foreign key (idProducto) references Productos(idProducto),
-     foreign key (idCantidadStock) references CantidadStock(idCantidadStock)
+     foreign key (IdCantidadStock) references CantidadStock(IdCantidadStock),
 );
 
