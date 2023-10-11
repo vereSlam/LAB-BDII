@@ -1,3 +1,4 @@
+
 -- DIRECCIONES
 
 insert into Departamentos values 
@@ -16,6 +17,7 @@ insert into Departamentos values
 	('SV', 'San Vicente', 'El Salvador'),
 	('SO', 'Sonsonate', 'El Salvador'),
 	('US', 'Usulután', 'El Salvador');
+	go 
 
 insert into Municipios values 
 --	ID_Municipio, Municipio, ID_Departamento
@@ -63,6 +65,7 @@ insert into Municipios values
 	('USN', 'Usulután Norte', 'US'),
 	('USE', 'Usulután Este', 'US'),
 	('USO', 'Usulután Oeste', 'US');
+go 
 
 insert into Distritos values 
 -- ID_Distrito, Distrito, ID_Municipio
@@ -342,6 +345,7 @@ insert into Distritos values
 	('USO02', 'Puerto El Triunfo', 'USO'),
 	('USO03', 'San Agustín', 'USO'),
 	('USO04', 'San Francisco Javier', 'USO');
+go 
 
 insert into Direcciones values 
 -- idDireccion, linea1, linea2, codigoPostal, idDistrito
@@ -360,6 +364,7 @@ insert into Direcciones values
 	('Barrio San Juan, Calle Principal, #10O', 'Junto a la iglesia', '06015', 'SSC03'), -- 13
 	('Urbanización Los Almendros, Calle A', 'Al lado del centro comercial 5', '03014', 'SOC01'), -- 14
 	('Colonia Primavera, Avenida Sur, #7A', 'Cerca de la escuela', '11023', 'USE01'); -- 15
+	go
 
 -- CLIENTES
 
@@ -370,6 +375,7 @@ insert into Clientes values
 	('Laura Johana', 'Ramírez Pérez', '79876543', 'lauraramirez@gmail.com', '54321098-7', '3' ),-- 3
 	('Diego José', 'Rodríguez García', '74561230', 'diegorodriguez@gmail.com', '98765432-1', '4'), -- 4
 	('Sofía Esmeralda', 'Fernández Sánchez', '61234567', 'sofiafernandez@gmail.com', '45678901-2', '5'); -- 5
+	go 
 
 -- EMPLEADOS
 
@@ -387,14 +393,22 @@ insert into Cargos values
 	('Reponedor'), -- 10
 	('Jefe de Almacen'), -- 11
 	('Trabajadores de Almacen'); -- 12
-	   
+go 
+
 insert into Empleados values 
 -- idEmpleado, nombresEmpleado, apellidosEmpleado, DUI, ISSS, telefono, email, fechaNac, fechaContratacion, salario, idCargo, idDireccion
 	('Carmen Elena','Reyes Ruiz','12345678974-2','1234565','1234-4321','Cu@gmail.com','1980-04-05','2010-12-23','670.45','3','6'), -- 1
 	('Carlos Alvaro','Castro Ruiz','01234567898-7','1234567','4567-8909','Ch@gmail.com','1990-08-12','2022-09-23','450.34','1','7'), -- 2
 	('Laura Sofia','Cuellar Valdez', '32145678909-3','3456789','6789-0987','CD@gmail.com','1977-09-08','2021-08-12','900.89','2','8'), -- 3
 	('Pablo Pedro','Garcia Lopez','12345432123-3','0987654','2345-5432','re@gmail.com','1977-09-12','2012-09-12','890.23','11','9'), -- 4
-	('Karla Maria','Lopez Ruis','12345654321-2','1234564','2345-6543','cg@gmail.com','1999-12-13','2018-10-11','900.00','8','10'); -- 5
+	('Karla Maria','Lopez Ruiz','12345654321-2','1234564','2345-6543','cg@gmail.com','1999-12-13','2018-10-11','900.00','8','10'), -- 5
+	('Claudia Maria','Reyes Rosales','12565688974-2','1244565','1434-4321','clau@gmail.com','1990-05-05','2019-12-23','1070.45','4','6'), -- 6
+	('Veronica Sonia','Castro Ruiz','01244567898-7','1244567','4567-8909','ver@gmail.com','1990-06-12','2022-06-23','450.34','5','7'), -- 7
+	('Patricia Maria','Cuellar Romero', '32145678909-3','3456789','6789-0987','pat@gmail.com','1987-03-08','2021-08-12','900.89','9','8'), -- 8
+	('Vilma Eliza','Garcia Cruz','12345431123-3','0981654','2315-5432','vil@gmail.com','1997-09-12','2022-09-12','890.23','12','9'), -- 9
+	('Cecilia Maura','Lemus Fuentes','11345654321-2','1235564','2355-6543','cl@gmail.com','1989-11-13','2017-10-21','500.00','7','10'), -- 10
+	('Cesar Mario','Reyes Gonzalez','12345678974-2','1234565','1239-4321','cesar@gmail.com','1987-04-05','2010-12-23','670.45','10','6');-- 11
+go
 
 insert into Proveedores values 
 -- idProveedor, nombreProveedor, telefono, email, idDireccion
@@ -403,6 +417,7 @@ insert into Proveedores values
     ('Consumo Facil', '3333-3333', 'Consumo.facil@gmail.com', '13'), -- 3
     ('StoreMax', '4444-4444', 'Store.Max@gmail.com', '14'), -- 4
     ('Agil S.A', '5555-5555', 'Agil@gmail.com', '15'); -- 5
+go
 
 -- PRODUCTOS
 
@@ -411,6 +426,7 @@ insert into Categorias values
     ('Alimentos'), -- 1
 	('Bebidas'), -- 2
 	('Artículos para el hogar'); -- 3
+go 
 
 insert into SubCategorias values
 -- idCategoria, subCategoria
@@ -430,6 +446,7 @@ insert into SubCategorias values
 	('3', 'Limpieza'), -- 11
 	('3', 'Cuidado personal'), -- 12
 	('3', 'Cocina y Comedor'); -- 13
+go 
 
 insert into UnidadPrecio values 
 -- idUnidadPrecio, unidadPrecio
@@ -438,6 +455,7 @@ insert into UnidadPrecio values
 	('botella'), -- 3
 	('bolsa'), -- 4
 	('paquete'); -- 5
+go 
 
 insert into Productos values 
 -- idProducto, idSubCategoria, idProveedor, nombreProducto, descripcion, precioUnitario, idUnidadPrecio
@@ -446,6 +464,7 @@ insert into Productos values
 	('11','3','Detergente Multiusos','Detergente líquido multiusos para limpiar superficies y eliminar la suciedad más difícil. Aroma fresco y limpio.','4.99','3'), -- 3
 	('12','4','Champú Revitalizante','Champú con fórmula revitalizante que fortalece el cabello y aporta brillo. Aroma fresco y duradero.','8.49','3'), -- 4
 	('7','5','Pizza Margarita','Pizza de masa delgada con salsa de tomate, mozzarella y hojas de albahaca fresca. Lista para calentar y disfrutar.','7.99','1'); -- 5
+go 
 
 insert into Descuentos values 
 -- idDescuento, nombreDescuento, fechaInicio, fechaFin, porcentajeDescuento
@@ -454,6 +473,7 @@ insert into Descuentos values
 	('Promo Frescura','2023-06-10','2023-06-20','5'), -- 3
 	('Limpieza Total','2023-06-25','2023-07-10','12'), -- 4
 	('Oferta de Sabor','2023-07-05','2023-07-20','20'); -- 5
+go 
 
 insert into AsignacionDescuentoProducto values 
 -- idAsignacionDescuentoProducto, idProducto, idDescuento
@@ -462,6 +482,7 @@ insert into AsignacionDescuentoProducto values
 	('2','3'), -- 3
 	('3','4'), -- 4
 	('5','5'); -- 5
+go 
 
 -- VENTAS DE PRODUCTOS
 
@@ -472,6 +493,7 @@ insert into Ventas values
     ('3', '3', '2023-08-17', '10:15:00'), -- 3
     ('4', '4', '2023-08-18', '16:20:00'), -- 4
     ('5', '5', '2023-08-19', '09:00:00'); -- 5
+go 
 
 insert into MetodoPago values 
 -- idMetodoPago, nombreMetodoPago
@@ -480,6 +502,7 @@ insert into MetodoPago values
     ('Tarjeta de Debito'), -- 3
     ('ChivoWallet'), -- 4
     ('BitCoin'); -- 5
+go 
 
 insert into DetallesVentas values 
 -- idDetallesVenta, idVenta, idProducto, cantidadVendida, subTotal, montoTotal, idMetodoPago
@@ -488,6 +511,7 @@ insert into DetallesVentas values
     ('3', '3', '1', '4.99', '4.99', '1'), -- 3
     ('4', '4', '1', '8.49', '8.49', '1'), -- 4
     ('5', '5', '1', '7.99', '7.99', '3'); -- 5
+go 
 
 -- COMPRA DE PRODUCTOS
 
@@ -498,6 +522,7 @@ insert into Compras values
     ('3', '4', '3', '2023-04-07', '998'), -- 3
     ('4', '4', '4', '2023-04-08', '849'), -- 4
     ('5', '4', '5', '2023-05-09', '958.80'); -- 5
+go 
 
 insert into CantidadStock values 
 -- idCantidadStock, idCompra, cantidad, fechaEntrada
@@ -508,6 +533,7 @@ insert into CantidadStock values
     ('5', '120', '2023-06-11'); -- 5
 
 -- INVENTARIO
+go 
 
 insert into Inventarios values 
 -- idInventario, idCantidadStock, cantExist, fechaActualizacion
@@ -516,3 +542,4 @@ insert into Inventarios values
     ('3', '199', '2023-08-18'), -- 3
     ('4', '99', '2023-08-19'), -- 4
     ('5', '119', '2023-08-20'); -- 5
+go 
