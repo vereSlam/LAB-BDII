@@ -1,34 +1,42 @@
 create database SuperMercado;
+go
 use SuperMercado;
+go
 
+-- DIRECCIONES
 
 create table Departamentos(
-	idDepartamento int primary key identity(1,1),
-	departamento varchar(80) not null
+	idDepartamento char(2) primary key,
+	departamento varchar(80) not null,
+	pais varchar(60) not null
 );
-
+go
 create table Municipios(
-	idMunicipio int primary key identity(1,1), 
-	municipio varchar(80), 
-	idDepartamento int not null
+	idMunicipio char(3) primary key, 
+	municipio varchar(80) not null, 
+	idDepartamento char(2) not null,
 	foreign key (idDepartamento) references Departamentos(idDepartamento)
 );
+go
 
 create table Distritos(
-	idDistrito int primary key identity(1,1), 
+	idDistrito varchar(5) primary key, 
 	distrito varchar(80)  not null,
-	idMunicipio int  not null,
+	idMunicipio char(3) not null,
 	foreign key (idMunicipio) references Municipios(idMunicipio)
 );
-
+go
 create table Direcciones(
 	idDireccion int primary key identity (1,1), 
 	linea1 varchar(255) not null, 
 	linea2 varchar (150), 
     codigoPostal int not null,
-	idDistrito int not null,
+	idDistrito varchar(5) not null,
 	foreign key (idDistrito) references Distritos(idDistrito)
 );
+go
+
+-- CLIENTES
 
 create table Clientes(
 	idCliente int primary key identity (1,1), 
@@ -40,19 +48,23 @@ create table Clientes(
 	idDireccion int not null,
 	foreign key (idDireccion) references Direcciones(idDireccion)
 );
+go
+
+-- EMPLEADOS
 
 create table Cargos(
 	idCargo int primary key identity(1,1),
 	cargo varchar(50) not null
 );
+go
 
 create table Empleados(
 	idEmpleado int primary key identity (1,1), 
 	nombresEmpleado varchar (150) not null, 
 	apellidosEmpleado varchar(150) not null, 
-	DUI varchar (13)  not null,
-	ISSS int  not null,
-	telefono varchar (9) not null,
+	DUI varchar(13) not null,
+	ISSS int,
+	telefono varchar(9) not null,
 	email varchar(255) not null, 
 	fechaNac date not null,
 	fechaContratacion date not null,
@@ -62,6 +74,9 @@ create table Empleados(
 	foreign key (idCargo) references Cargos(idCargo),
 	foreign key (idDireccion) references Direcciones(idDireccion)
 );
+go
+
+-- PROVEEDORES
 
 create table Proveedores(
 	idProveedor int primary key identity(1,1), 
@@ -71,29 +86,43 @@ create table Proveedores(
 	idDireccion int  not null,
 	foreign key (idDireccion) references Direcciones(idDireccion)
 );
+go
+
+-- PRODUCTOS
 
 create table Categorias(
 	 idCategoria int primary key identity (1,1), 
 	 categoria varchar(150)  not null
 );
+go
+
+create table SubCategorias(
+	idSubCategoria int primary key identity(1,1),
+	idCategoria int not null,
+	subCategoria varchar(150) not null
+	foreign key (idCategoria) references Categorias(idCategoria)
+);
+go
 
 create table unidadPrecio(
 	idUnidadPrecio int primary key identity(1,1), 
     unidadPrecio varchar(200) not null,
 );
+go
 
 create table Productos(
 	 idProducto int primary key identity(1,1), 
-	 idCategoria int not null,
+	 idSubCategoria int not null,
 	 idProveedor int not null,
 	 nombreProducto varchar(150)  not null,
 	 descripcion varchar(255) not null,
 	 precioUnitario float not null,
      idUnidadPrecio int not null
-	 foreign key (idCategoria)  references Categorias(idCategoria),
+	 foreign key (idSubCategoria)  references SubCategorias(idSubCategoria),
 	 foreign key (idProveedor) references Proveedores(idProveedor),
      foreign key (idUnidadPrecio) references unidadPrecio(idUnidadPrecio)
 );
+go
 
 create table Descuentos (
     idDescuento int primary key identity(1,1),
@@ -102,6 +131,7 @@ create table Descuentos (
     fechaFin date not null,
     porcentajeDescuento float not null
 );
+go
 
 create table AsignacionDescuentoProducto (
     idAsignacionDescuentoProducto int primary key identity(1,1),
@@ -110,81 +140,72 @@ create table AsignacionDescuentoProducto (
     foreign key (idProducto) references Productos(idProducto),
     foreign key (idDescuento) references Descuentos(idDescuento)
 );
+go
 
-create table FacturaVentas(
-	 idFactVenta int primary key identity(1,1), 
+-- VENTAS DE PRODUCTOS
+
+create table Ventas(
+	 idVenta int primary key identity(1,1), 
 	 idEmpleado int not null,
 	 idCliente int not null,
-     idProducto int not null,
 	 fechaVenta date not null,
 	 horaVenta time not null,
-	 totalVenta float, 
 	 foreign key (idEmpleado) references Empleados(idEmpleado),
-	 foreign key (idCliente) references Clientes(idCliente),
-     foreign key (idProducto) references Productos(idProducto)
+	 foreign key (idCliente) references Clientes(idCliente)
 );
+go
 
-create table DetallesFactVentas(
-	 idDetallesFactVenta int primary key identity(1,1), 
-     idFactVentas int not null,
+Create table MetodoPago(
+	idMetodoPago int primary key identity(1,1),
+	nombreMetodoPago varchar(100) not null,
+ );
+go
+
+create table DetallesVentas(
+	 idDetallesVenta int primary key identity(1,1), 
+     idVenta int not null,
 	 idProducto int not null,
 	 cantidadVendida int not null,
-	 precioUnitario float not null,
-	 subtotal float not null,
-     MontoTotal Decimal(10,2) not null,
-	 foreign key (idFactVentas) references FacturaVentas(idFactVenta),
-	 foreign key (idProducto) references Productos(idProducto)
- );
- 
- create table MetodoPago(
-	idMetodoPago int primary key identity(1,1),
-	NombreMetodoPago varchar(100)
- );
-
-create table Pagos(
-	 idPago int primary key identity(1,1),
-	 idFactura int not null,
+	 subTotal float not null,
+     montoTotal Decimal(10,2) not null,
 	 idMetodoPago int not null,
-	 montoPagado float not null,
-	 fechaPago date not null,
-	 horaPago time not null,
-	 foreign key (idFactura) references FacturaVentas(idFactVenta),
+	 foreign key (idVenta) references Ventas(idVenta),
+	 foreign key (idProducto) references Productos(idProducto),
 	 foreign key (idMetodoPago) references MetodoPago(idMetodoPago)
-);
+ );
+go
 
-create table CantidadStock(
-	IdCantidadStock int primary key identity(1,1),
-	Cantidad int not null,
-	FechaEntrada date not null,
-);
+--COMPRA DE PRODUCTOS
 
 Create table Compras(
-	IdCompra int primary key identity(1,1),
-	IdProveedor int not null,
-	IdCantidadStock int not null,
-	IdEmpleado int not null,
-	FechaCompra Date,
-	ProductosComprados int,
-	foreign key (IdEmpleado) references Empleados(IdEmpleado),
-	foreign key (IdProveedor) references Proveedores(IdProveedor),
-	foreign key (IdCantidadStock) references CantidadStock(IdCantidadStock)
+	idCompra int primary key identity(1,1),
+	idProveedor int not null,
+	idEmpleado int not null,
+	idProducto int not null,
+	fechaCompra Date,
+	montoTotal float,
+	foreign key (idEmpleado) references Empleados(idEmpleado),
+	foreign key (idProveedor) references Proveedores(idProveedor),
+    foreign key (idProducto) references Productos(idProducto)
 );
+go
 
-create table FacturaCompras(
-    IdFactCompra int primary key identity(1,1),
-    FechaFactura Date not null,
-    IdCompra int,
-    MontoTotal Decimal(10,2) not null,    
-    foreign key (IdCompra) references Compras(IdCompra)
+create table CantidadStock(
+	idCantidadStock int primary key identity(1,1),
+	idCompra int not null,
+	cantidad int,
+	fechaEntrada date not null,
+	foreign key (idCompra) references Compras(idCompra)
 );
+go
+
+-- INVENTARIO
 
 create table Inventarios(
 	 idInventario int primary key identity(1,1),
-     idProducto int not null,
      idCantidadStock int not null,
 	 cantExist int not null,
 	 fechaActualizacion date,
-	 foreign key (idProducto) references Productos(idProducto),
-     foreign key (IdCantidadStock) references CantidadStock(IdCantidadStock),
+     foreign key (idCantidadStock) references CantidadStock(idCantidadStock)
 );
-
+go
