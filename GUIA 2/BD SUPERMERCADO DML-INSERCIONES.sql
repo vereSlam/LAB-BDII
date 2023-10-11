@@ -410,6 +410,8 @@ insert into Empleados values
 	('Cesar Mario','Reyes Gonzalez','12345678974-2','1234565','1239-4321','cesar@gmail.com','1987-04-05','2010-12-23','670.45','10','6');-- 11
 go
 
+-- PROVEEDORES
+
 insert into Proveedores values 
 -- idProveedor, nombreProveedor, telefono, email, idDireccion
 	('Alimentacion del Sur', '1111-1111', 'Ali.Sur@gmail.com', '11'), -- 1
