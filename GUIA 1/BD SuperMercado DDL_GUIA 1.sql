@@ -11,6 +11,7 @@ create table Departamentos(
 	pais varchar(60) not null
 );
 go
+
 create table Municipios(
 	idMunicipio char(3) primary key, 
 	municipio varchar(80) not null, 
