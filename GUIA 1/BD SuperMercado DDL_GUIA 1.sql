@@ -77,40 +77,6 @@ create table Empleados(
 );
 go
 
--- MANEJO DE ROLES
-
-create table Opciones(
-	idOpcion int primary key identity(1, 1),
-    nombreOpcion varchar(60) not null
-);
-go
-
-create table Roles(
-	idRol int primary key identity(1, 1),
-    nombreRol varchar(60) not null
-);
-go
-
-create table AsignacionRolesOpciones(
-	idAsignacionRol int primary key identity(1, 1),
-    idRol int not null,
-    idOpcion int not null,
-	foreign key (idRol) references Roles(idRol),
-	foreign key (idOpcion) references Opciones(idOpcion)
-);
-go
-
-create table Usuarios(
-	idUsuario int primary key identity(1, 1),	
-    idEmpleado int not null,
-	idRol int not null,
-    usuario varchar(60) not null,
-    clave varchar(60) not null,
-	foreign key (idEmpleado) references Empleados(idEmpleado),
-	foreign key (idRol) references Roles(idRol)
-);
-go
-
 -- PROVEEDORES
 
 create table Proveedores(
