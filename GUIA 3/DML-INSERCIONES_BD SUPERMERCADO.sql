@@ -404,6 +404,116 @@ insert into Proveedores values
     ('StoreMax', '4444-4444', 'Store.Max@gmail.com', '14'), -- 4
     ('Agil S.A', '5555-5555', 'Agil@gmail.com', '15'); -- 5
 
+-- MANEJO DE ROLES
+
+insert into Opciones values
+-- idOpcion, nombreOpcion
+	('Gestionar Cuentas'), -- 1
+	('Gestionar Departamentos'),  -- 2+
+	('Gestionar Municipios'), -- 3+
+	('Gestionar Distritos'), -- 4+
+	('Gestionar Direcciones'), -- 5
+	('Gestionar Clientes'), -- 6
+	('Gestionar Cargos'),-- 7
+	('Gestionar Empleados'), -- 8
+	('Gestionar Opciones'), -- 9
+	('Gestionar Roles'), -- 10
+	('Gestionar AsignacionRolesOpciones'), -- 11
+	('Gestionar Usuarios'), -- 12
+	('Gestionar Proveedores'), -- 13
+	('Gestionar Categorias'), -- 14+
+	('Gestionar SubCategorias'), -- 15+
+	('Gestionar unidadPrecio'), -- 16+
+	('Gestionar Productos'), -- 17
+	('Gestionar Descuentos'), -- 18
+	('Gestionar AsignacionesDescuentoProducto'), -- 19
+	('Gestionar Ventas'), -- 20
+	('Gestionar MetodoPago'), -- 21+
+	('Gestionar DetallesVentas'), -- 22
+	('Gestionar Compras'), -- 23
+	('Gestionar CantidadStock'), -- 24
+	('Gestionar Inventarios')-- 25
+
+insert into Roles values
+-- idRol, nombreRol
+	('SysAdmin'), -- 1
+	('Gerente'), -- 2
+	('Jefe de control de stock'),  -- 3
+	('Cajero'), -- 4
+	('Contador'), -- 5
+    ('Despachador de carne'), -- 6
+	('Reponedor'), -- 7
+	('Jefe de Almacen'), -- 8
+	('Trabajadores de Almacen'), -- 9
+	('RRHH');  -- 10
+
+insert into AsignacionRolesOpciones values
+-- IdAsiganacionRol, idRol, IdOpcion
+	-- SysAdmin: Todos los permisos
+	('1', '1'), ('1', '2'), ('1', '3'), ('1', '4'), ('1', '5'), 
+	('1', '6'), ('1', '7'), ('1', '8'), ('1', '9'), ('1', '10'), 
+	('1', '11'), ('1', '12'), ('1', '13'), ('1', '14'), ('1', '15'), 
+	('1', '16'), ('1', '17'), ('1', '18'), ('1', '19'), ('1', '20'), 
+	('1', '21'), ('1', '22'), ('1', '23'), ('1', '24'), ('1', '25'),
+	-- Gerente: 
+	('2', '5'), -- Direcciones
+	('2', '6'), -- Clientes
+	('2', '7'), -- Cargos
+	('2', '8'), -- Empleados
+	('2', '13'), -- Proveedores
+	('2', '15'), -- SubCategorias
+	('2', '17'), -- Productos
+	('2', '20'), -- Ventas
+	('2', '22'), -- DetallesVentas
+	('2', '23'), -- Compras
+	('2', '24'), -- CantidadStock
+	('2', '25'), -- Inventarios
+
+	-- Jefe de control de stock:
+	('3', '17'),  -- Productos
+	('3', '23'), -- Compras
+	('3', '24'), -- CantidadStock
+	('3', '25'), -- Inventarios
+	-- Cajero
+	('4', '6'), -- Clientes
+	('4', '20'), -- Ventas
+	('4', '22'), -- DetallesVentas
+	-- Contador
+	('5', '25'), -- Inventarios
+
+    -- Despachador de carne
+	('6', '17'), -- Productos
+	('6', '24'), -- CantidadStock
+	-- Reponedor
+	('5', '17'), -- Productos
+	('5', '24'), -- CantidadStock
+	-- Jefe de Almacen
+	('6', '13'), -- Proveedores
+	('6', '17'), -- Productos
+	('6', '23'), -- Compras
+	('6', '24'), -- CantidadStock
+
+	-- Trabajadores de Almacen
+	('7', '17'), -- Productos
+	('7', '24'), -- CantidadStock
+	-- RRHH:
+	('8', '5'),  -- Direcciones
+	('8', '7'),  -- Cargos
+	('8', '8'),  -- Empleados
+
+insert into Usuarios values
+	-- IdEmpleado, idRol, usuario, clave
+	-- Administrador
+	('2', '1', 'admin_carloscastro', 'root'),
+	-- Gerente
+	('3', '2', 'gerente_lauracuellar', 'cuellar1234'),
+	-- Jefe de Almacen
+	('4', '8', 'jefeAlmacen_pablogarcia', 'garcia1234'),
+	-- RRHH
+	('5', '10', 'rrhh_karlalopez', 'lopez1234'),
+	-- Cajero
+	('1', '4', 'cajero_carmenreyes', 'reyes1234');
+
 -- PRODUCTOS
 
 insert into Categorias values 
